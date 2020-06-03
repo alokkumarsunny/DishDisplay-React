@@ -17,14 +17,14 @@ const DishDetail = (props) => {
 }
     
 
-    function RenderDish({dish}){
-        if(dish != null){
+    function RenderDish(props){
+        if(props.dish != null){
             return(
                 <Card>
-                    <CardImg width="100%" src={dish.image} alt={dish.name}/>
+                    <CardImg width="100%" src={props.dish.image} alt={props.dish.name}/>
                     <CardBody>
-                        <CardTitle>{dish.name}</CardTitle>
-                        <CardText>{dish.description}</CardText>
+                        <CardTitle>{props.dish.name}</CardTitle>
+                        <CardText>{props.dish.description}</CardText>
                     </CardBody>
                 </Card>
             );
