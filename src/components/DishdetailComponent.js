@@ -14,13 +14,14 @@ class DishDetail extends Component{
 
     render(){
             return(
-                <div className="row">
-                    <div className="col-6 col-md-5 m-1">
-                        {this.renderDish(this.props.selectedDish)}
-                    </div>
-                    <div className="col-6 col-md-5 m-1">
-                        <h1>Comments</h1>
-                        {this.renderComment(this.props.selectedDish)}
+                <div className="container">
+                    <div className="row">
+                        <div className="col-6 col-md-5 m-1">
+                            {this.renderDish(this.props.selectedDish)}
+                        </div>
+                        <div className="col-6 col-md-5 m-1">                           
+                            {this.renderComment(this.props.selectedDish)}
+                        </div>
                     </div>
                 </div>
             );
@@ -29,11 +30,11 @@ class DishDetail extends Component{
         if(dish != null){
             return(
                 <Card>
-                <CardImg width="100%" src={dish.image} alt={dish.name}/>
-                <CardBody>
-                    <CardTitle>{dish.name}</CardTitle>
-                    <CardText>{dish.description}</CardText>
-               </CardBody>
+                    <CardImg width="100%" src={dish.image} alt={dish.name}/>
+                    <CardBody>
+                        <CardTitle>{dish.name}</CardTitle>
+                        <CardText>{dish.description}</CardText>
+                    </CardBody>
                 </Card>
             );
         }else{
@@ -49,10 +50,11 @@ class DishDetail extends Component{
                 return (
                     <div key={comment.id}>
                         <p>{comment.comment}</p>
-                        <p>-- {comment.author} , {comment.date}</p>
+                        <p>-- {comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
                     </div>
                 );
             });
+            commentdiv.unshift(<h3>Comments:</h3>)
             return(               
                 commentdiv
             );
