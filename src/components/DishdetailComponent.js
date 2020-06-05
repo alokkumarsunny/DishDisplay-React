@@ -1,15 +1,30 @@
 import React from 'react';
-import {Card,CardImg,CardText,CardBody,CardTitle} from 'reactstrap';
-
+import {Card,CardImg,CardText,CardBody,CardTitle ,Breadcrumb , BreadcrumbItem} from 'reactstrap';
+import {Link} from 'react-router-dom';
 const DishDetail = (props) => {
     return(
         <div className="container">
+             <Breadcrumb>
+                        <BreadcrumbItem>
+                            <Link to='/home'> Home </Link>                          
+                        </BreadcrumbItem>
+                        <BreadcrumbItem>
+                            <Link to='/menu'> Menu </Link>                           
+                        </BreadcrumbItem>                       
+                        <BreadcrumbItem active>
+                            {props.selectedDish.name}
+                        </BreadcrumbItem>                      
+            </Breadcrumb>    
+            <div className="col-12">
+                            <h3>{props.selectedDish.name}</h3>
+            </div>
+
             <div className="row">
                 <div className="col-6 col-md-5 m-1">       
                     <RenderDish dish={props.selectedDish}/>
                 </div>
                 <div className="col-6 col-md-5 m-1">                           
-                   <RenderComment dish = {props.selectedDish}/>
+                   <RenderComment comments = {props.comments}/>
                 </div>
             </div>
         </div>
@@ -35,9 +50,9 @@ const DishDetail = (props) => {
         }
     }
 
-    function RenderComment({dish}){
-        if(dish != null){
-            const commentdiv = dish.comments.map((comment) => {
+    function RenderComment({comments}){
+        if(comments != null){
+            const commentdiv = comments.map((comment) => {
                 return (
                     <div key={comment.id}>
                         <p>{comment.comment}</p>
